@@ -25,9 +25,8 @@ The application provides a three-part automated analysis upon upload and allows 
 ## Live Demo & Screenshot
 
 **You can find a live demo of the application here:**
-`[Your Live Demo URL from Render Will Go Here]`
 
-![SmartFin Analyzer](https://mini-finance-analyst.onrender.com/)
+[SmartFin Analyzer](https://mini-finance-analyst.onrender.com/)
 
 ---
 
@@ -48,8 +47,8 @@ To run this project on your local machine, follow these steps:
 
 1.  **Clone the Repository:**
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git)
-    cd YOUR_REPOSITORY_NAME
+    git clone https://github.com/mateenkq/smartfin-analyzer.git
+    cd SMARTFIN_ANALYZER
     ```
 
 2.  **Create and Activate a Virtual Environment:**
