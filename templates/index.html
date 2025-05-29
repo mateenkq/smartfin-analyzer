@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFin Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>SmartFin Analyzer</h1>
+    </header>
+    <main class="container">
+        <section class="panel">
+            <h2>Dashboard</h2>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="upload-area">
+                    <label for="file-upload" class="custom-file-upload">Choose PDF File</label>
+                    <span id="file-name-display" class="file-name">No file selected</span>
+                </div>
+                <input id="file-upload" name="file" type="file" accept=".pdf"/>
+                <button type="submit" class="btn">Upload and Analyze</button>
+            </form>
+            <p class="status">
+                <strong>File Status:</strong> 
+                {% if filename %}
+                    {{ filename }} has been analyzed. Ready to search.
+                {% else %}
+                    Please upload a PDF document for analysis.
+                {% endif %}
+            </p>
+
+            <div class="overview">
+                <h3>Business Overview</h3>
+                <pre>{% if business_overview %}{{ business_overview }}{% else %}Analysis will appear here after uploading a document...{% endif %}</pre>
+            </div>
+
+            <div class="overview">
+                <h3>Key Financial Metrics</h3>
+                {% if financial_metrics and financial_metrics|length > 1 %}
+                    <table class="financial-table">
+                        <thead>
+                            <tr>
+                                {% for header in financial_metrics[0] %}
+                                    <th>{{ header }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in financial_metrics[1:] %}
+                                <tr>
+                                    {% for cell in row %}
+                                        <td>{{ cell }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <pre>Analysis will appear here after uploading a document...</pre>
+                {% endif %}
+            </div>
+            
+            <div class="overview">
+                <h3>Key Risks</h3>
+                <pre>{% if key_risks %}{{ key_risks }}{% else %}Analysis will appear here after uploading a document...{% endif %}</pre>
+            </div>
+
+        </section>
+
+        <section class="panel">
+            <h2>Search</h2>
+            <form action="/search" method="post" class="search-form">
+                <textarea name="query" placeholder="Ask a follow-up question about the document or search the web..." class="search-input" required rows="3"></textarea>
+                <button type="submit" class="btn search-btn" {% if not filename %}disabled{% endif %}>Search</button>
+            </form>
+
+            {% if search_result %}
+            <div class="result">
+                <h3>Search Result</h3>
+                <pre>{{ search_result }}</pre>
+            </div>
+            {% endif %}
+        </section>
+    </main>
+
+    <script>
+        const fileInput = document.getElementById('file-upload');
+        const fileNameDisplay = document.getElementById('file-name-display');
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                fileNameDisplay.textContent = fileInput.files[0].name;
+            } else {
+                fileNameDisplay.textContent = 'No file selected';
+            }
+        });
+    </script>
+
+</body>
+</html>

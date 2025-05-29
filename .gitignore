@@ -1,0 +1,18 @@
+# Python virtual environment
+venv/
+env/
+
+# Secrets file
+.env
+
+# Application-specific uploads
+/uploads/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS & Editor specific files
+.DS_Store
+.vscode/
+.idea/

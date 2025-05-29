@@ -1,0 +1,12 @@
+# requirements.txt
+Flask
+langchain
+langchain-openai
+langgraph
+langchain-community
+chromadb
+tavily-python
+pydantic
+pypdf
+gunicorn
+python-dotenv
